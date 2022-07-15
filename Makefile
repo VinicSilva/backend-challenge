@@ -5,9 +5,6 @@ init:
 up:
 	docker-compose up -d
 
-up-prod:
-	docker-compose -f docker-compose-prod.yml up -d
-
 stop:
 	docker-compose stop
 
@@ -25,7 +22,7 @@ logs:
 	docker-compose logs -f
 
 cov:
-	docker-compose exec api_v2 npm run test:cov
+	docker-compose exec backend_api npm run test:cov
 	
 bash:
-	docker-compose exec api_v2 sh
+	docker-compose exec backend_api sh
