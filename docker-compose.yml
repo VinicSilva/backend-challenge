@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+  api:
+    container_name: backend_api
+    build:
+      dockerfile: Dockerfile
+      context: .
+      target: development
+    volumes:
+      - .:/usr/src/app
+      - ./usr/src/app/node_modules
+    env_file: .env
+    command: npm run start:dev
+    ports:
+      - 3008:3008
+    depends_on:
+      - postgres
+  postgres:
+    container_name: backend_db
+    image: postgres:alpine
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
