@@ -1,9 +1,9 @@
 #### BUILD FOR LOCAL DEVELOPMENT
 FROM node:18-alpine As development
 WORKDIR /usr/src/app
-COPY --chown=node:node package*.json ./
+COPY package*.json ./
 RUN npm install
-COPY --chown=node:node . .
+COPY . .
 RUN npm run build
 USER node
 
