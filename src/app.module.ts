@@ -1,3 +1,4 @@
+import { JoiPipeModule } from 'nestjs-joi';
 import { BootstrapModule } from './bootstrap.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -16,6 +17,7 @@ import { PlaceModule } from './place/place.module';
       useFactory: (config: ConfigService) => config.get('database').getConfig()
     }),
     PlaceModule,
+    JoiPipeModule,
   ],
   controllers: [AppController],
   providers: [AppService],

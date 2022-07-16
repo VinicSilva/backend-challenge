@@ -11,8 +11,7 @@ async function bootstrap() {
   const port = configService.get('app.port')
   const logger = new Logger()
   const config = new DocumentBuilder()
-    .setTitle('Place Docs')
-    .setDescription('The Places API')
+    .setTitle('API Documentation')
     .setVersion('1.0')
     .addTag('places')
     .build();
@@ -21,6 +20,6 @@ async function bootstrap() {
 
   await app.listen(port, () => {
     logger.log(`App is running on port: ${port as string}`)
-  })
+  });
 }
 bootstrap();

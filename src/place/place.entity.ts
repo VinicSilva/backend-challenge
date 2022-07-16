@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class Place {
@@ -13,7 +19,7 @@ export class Place {
 
   @Column({ type: 'varchar' })
   public goal: string;
-  
+
   @Column({ type: 'varchar', length: 255 })
   public flagUrl: string;
 

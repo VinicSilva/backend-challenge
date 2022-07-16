@@ -7,44 +7,44 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class PlaceService {
-    constructor(
-        @InjectRepository(Place) private placeRepository: Repository<Place>,
-    ) {}
-    
-    getAll() {
-        return this.placeRepository.find();
+  constructor(
+    @InjectRepository(Place) private placeRepository: Repository<Place>,
+  ) {}
+
+  getAll() {
+    return this.placeRepository.find({ order: { goal: 1 } });
+  }
+
+  async getById(id: number) {
+    const todo = await this.placeRepository.findOne({ where: { id } });
+    if (todo) {
+      return todo;
     }
 
-    async getById(id: number) {
-        const todo = await this.placeRepository.findOne({where: {id}});
-        if (todo) {
-        return todo;
-        }
+    throw new HttpException('Place not found', HttpStatus.NOT_FOUND);
+  }
 
-        throw new HttpException('Place not found', HttpStatus.NOT_FOUND);
+  async create(todo: CreatePlaceDto) {
+    const newTodo = await this.placeRepository.create(todo);
+    await this.placeRepository.save(newTodo);
+
+    return newTodo;
+  }
+
+  async update(id: number, post: UpdatePlaceDto) {
+    await this.placeRepository.update(id, post);
+    const updatedTodo = await this.placeRepository.findOne({ where: { id } });
+    if (updatedTodo) {
+      return updatedTodo;
     }
 
-    async create(todo: CreatePlaceDto) {
-        const newTodo = await this.placeRepository.create(todo);
-        await this.placeRepository.save(newTodo);
+    throw new HttpException('Place not found', HttpStatus.NOT_FOUND);
+  }
 
-        return newTodo;
+  async delete(id: number) {
+    const deletedTodo = await this.placeRepository.delete(id);
+    if (!deletedTodo.affected) {
+      throw new HttpException('Place not found', HttpStatus.NOT_FOUND);
     }
-
-    async update(id: number, post: UpdatePlaceDto) {
-        await this.placeRepository.update(id, post);
-        const updatedTodo = await this.placeRepository.findOne({where: {id}});
-        if (updatedTodo) {
-        return updatedTodo;
-        }
-
-        throw new HttpException('Place not found', HttpStatus.NOT_FOUND);
-    }
-
-    async delete(id: number) {
-        const deletedTodo = await this.placeRepository.delete(id);
-        if (!deletedTodo.affected) {
-        throw new HttpException('Place not found', HttpStatus.NOT_FOUND);
-        }
-    }
+  }
 }
