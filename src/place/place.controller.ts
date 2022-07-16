@@ -2,7 +2,9 @@ import { UpdatePlaceDto } from './dto/update-place.dto';
 import { CreatePlaceDto } from './dto/create-place.dto';
 import { PlaceService } from './place.service';
 import { Body, Controller, Delete, Get, Param, Post, Put, } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('places')
 @Controller('api/v1/place')
 export class PlaceController {
     constructor(private readonly placeService: PlaceService) {}
