@@ -11,8 +11,9 @@ export class PlaceService {
     @InjectRepository(Place) private placeRepository: Repository<Place>,
   ) {}
 
-  getAll() {
-    return this.placeRepository.find({ order: { goal: 1 } });
+  async getAll() {
+    const places = await this.placeRepository.find();
+    return places.sort((firstElement: any, nextElement: any) => (new Date(`01/${firstElement.goal}`) > new Date(`01/${nextElement.goal}`)) ? 1 : -1);
   }
 
   async getById(id: number) {
