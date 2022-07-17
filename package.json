@@ -28,6 +28,7 @@
     "@nestjs/typeorm": "^9.0.0",
     "@types/joi": "^17.2.3",
     "class-validator": "^0.13.1",
+    "cls-rtracer": "^2.5.1",
     "joi": "^17.6.0",
     "nestjs-config": "^1.4.10",
     "nestjs-joi": "^1.7.0",

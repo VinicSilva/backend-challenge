@@ -4,9 +4,11 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  Unique,
 } from 'typeorm';
 
 @Entity()
+@Unique(['country', 'name'])
 export class Place {
   @PrimaryGeneratedColumn()
   public id!: number;
