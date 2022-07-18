@@ -18,7 +18,7 @@ export class PlaceController {
   constructor(private readonly placeService: PlaceService) {}
 
   @Get()
-  getTodos() {
+  get() {
     return this.placeService.getAll();
   }
 
@@ -38,7 +38,7 @@ export class PlaceController {
   }
 
   @Delete(':id')
-  async deleteTodo(@Param('id') id: string) {
+  async delete(@Param('id') id: string) {
     this.placeService.delete(Number(id));
   }
 }
