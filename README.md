@@ -6,6 +6,12 @@
 make init
 ```
 
+### To see the apllication logs, run the command bellow:
+
+```
+make logs
+```
+
 ### When the project is running, open the API documentation to test the endpoints. 
 
 - **URL default (depends of the port configured): http://localhost:3008/docs**
