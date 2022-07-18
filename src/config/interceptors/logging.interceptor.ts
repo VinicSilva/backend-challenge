@@ -36,11 +36,11 @@ export class LoggingInterceptor implements NestInterceptor {
         this.logger.log(`### Response API | ${JSON.stringify({ method, url, statusCode, data, ip })} | TraceId: (${traceId})`)
       }, (exception: any) => {
           const exceptionMessage = exception.message;
+          const statusCode = exception.statusCode;
           if (exceptionMessage.includes('violates unique constraint')) {
-            let errorMessage = 'This place already is saved.';
-            this.logger.log(`### Response API | ${JSON.stringify({ method, url, statusCode: 409, data: errorMessage, ip })} | TraceId: (${traceId})`)
-            throw new ConflictException(errorMessage);
+            throw new ConflictException('This place already is saved.');
           }
+          this.logger.log(`### Response API | ${JSON.stringify({ method, url, statusCode, data: exceptionMessage, ip })} | TraceId: (${traceId})`)
         }
       ),
     )
