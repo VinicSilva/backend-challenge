@@ -17,34 +17,34 @@ export class PlaceService {
   }
 
   async getById(id: number) {
-    const todo = await this.placeRepository.findOne({ where: { id } });
-    if (todo) {
-      return todo;
+    const place = await this.placeRepository.findOne({ where: { id } });
+    if (place) {
+      return place;
     }
 
     throw new HttpException('Place not found', HttpStatus.NOT_FOUND);
   }
 
-  async create(todo: CreatePlaceDto) {
-    const newTodo = await this.placeRepository.create(todo);
-    await this.placeRepository.save(newTodo);
+  async create(place: CreatePlaceDto) {
+    const newPlace = await this.placeRepository.create(place);
+    await this.placeRepository.save(newPlace);
 
-    return newTodo;
+    return newPlace;
   }
 
-  async update(id: number, post: UpdatePlaceDto) {
-    await this.placeRepository.update(id, post);
-    const updatedTodo = await this.placeRepository.findOne({ where: { id } });
-    if (updatedTodo) {
-      return updatedTodo;
+  async update(id: number, place: UpdatePlaceDto) {
+    await this.placeRepository.update(id, place);
+    const updatedPlace = await this.placeRepository.findOne({ where: { id } });
+    if (updatedPlace) {
+      return updatedPlace;
     }
 
     throw new HttpException('Place not found', HttpStatus.NOT_FOUND);
   }
 
   async delete(id: number) {
-    const deletedTodo = await this.placeRepository.delete(id);
-    if (!deletedTodo.affected) {
+    const deletedPlace = await this.placeRepository.delete(id);
+    if (!deletedPlace.affected) {
       throw new HttpException('Place not found', HttpStatus.NOT_FOUND);
     }
   }
