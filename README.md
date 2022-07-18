@@ -1,4 +1,4 @@
-# Steps to run project
+# Steps to run project (**It's necessary to use Docker to execute the application**)
 
 ### Run the command bellow to run project:
 
@@ -6,7 +6,7 @@
 make init
 ```
 
-### To see the apllication logs, run the command bellow:
+### To see the application logs, run the command bellow:
 
 ```
 make logs
