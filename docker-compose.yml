@@ -5,6 +5,8 @@ networks:
 services:
   backend_api:
     container_name: backend_api
+    networks:
+      - kong-fc
     build:
       dockerfile: Dockerfile
       context: .
@@ -22,6 +24,8 @@ services:
     container_name: backend_db
     image: postgres:alpine
     restart: always
+    networks:
+      - kong-fc
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
@@ -40,7 +44,7 @@ services:
     image: postgres:9.5
     deploy:
       restart_policy:
-        condition: any
+        condition: on-failure
     networks:
       - kong-fc
     environment:
@@ -106,7 +110,7 @@ services:
       - kong-fc
     deploy:
       restart_policy:
-        condition: any
+        condition: on-failure
     depends_on:
       - kong-database
     environment:
